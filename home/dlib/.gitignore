@@ -1,1 +1,4 @@
 encoding/dataset*/
+/photo/
+*.jpg
+*.png

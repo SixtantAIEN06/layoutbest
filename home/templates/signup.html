@@ -48,10 +48,11 @@
     <div class="row justify-content-center" >
         <div class="col-6">
             <form name='form1' method="post" onsubmit="return submitfunction()">
+                {%csrf_token%}
                 <div class="form-row">
                     <div class="form-group col-md-4">
-                        <label for="member_name">姓名</label>
-                        <input type="text" class="form-control" id="member_name" name="member_name"
+                        <label for="username">姓名</label>
+                        <input type="text" class="form-control" id="username" name="username"
                                required>
                     </div>
 
@@ -68,15 +69,15 @@
                         <input type="email" class="form-control" id="email" name="email" required>
                     </div>
                     <div class="form-group col-md-4 offset-md-1">
-                        <label for="ident" name="id_number">身分證</label>
-                        <input type="text" class="form-control" id="ident" name="id_number" maxlength="10" required pattern="[a-zA-Z]{1}[1-2]{1}\d{8}"
+                        <label for="social_id" name="social_id">身分證</label>
+                        <input type="text" class="form-control" id="social_id" name="social_id" maxlength="10" required pattern="[a-zA-Z]{1}[1-2]{1}\d{8}"
                                onblur="identget()">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-4">
-                        <label for="phone" name="phone">電話號碼</label>
-                        <input type="text" class="form-control" id="phone" name="phone" maxlength="10" pattern="09\d{2}\d{3}\d{3}" required>
+                        <label for="phone_number" name="phone_number">電話號碼</label>
+                        <input type="text" class="form-control" id="phone_number" name="phone_number" maxlength="10" pattern="09\d{2}\d{3}\d{3}" required>
                     </div>
                 </div>
                 <div class="form-row">
@@ -91,7 +92,7 @@
                     </div>
                 </div>
 
-                <div class="form-row">
+                <!-- <div class="form-row">
                     <div class="form-group col-md-3">
                         <label for="city">縣市</label><br>
                         <select name="city" id="city" onchange='listener()'>
@@ -108,17 +109,16 @@
                         <label for="inputZip">郵遞區號</label>
                         <input type="text" class="form-control" id="inputZip">
                     </div>
-                </div>
-                <div class="form-row">
+                </div> -->
+                <!-- <div class="form-row">
 
 
                     <div class="form-group col-md-12">
                         <label for="address">地址</label>
-                        <input type="text" class="form-control" id="address" name="address" required
-                               placeholder="台北市中正區">
+                        <input type="text" class="form-control" id="address" name="address" placeholder="台北市中正區">
                     </div>
 
-                </div>
+                </div> -->
 
                 <div class="form-row justify-content-end">
 

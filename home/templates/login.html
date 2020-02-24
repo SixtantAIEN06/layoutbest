@@ -49,8 +49,9 @@
 
 <img src="" alt="">
 
-<form method="post" action="/" >
+<form method="post" action="/login/" >
     {% csrf_token %}
+    <div>{{ message }}</div>
     <div class="form-group">
         <label for="user_id">USER ID</label>
         <input type="text" class="form-control" name="user_id" id="user_id">

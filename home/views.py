@@ -13,7 +13,7 @@ import tensorflow as tf
 import datetime
 import requests
 import json as jjj
-from .models import Classified
+from .models import Classified,Members
 # from .modelsclassified import classified
 from django.core import serializers
 from django.core.serializers import serialize
@@ -33,6 +33,7 @@ def index(request):
 
 def selected(request):
     # searchname=request.GET.get("searchname")
+    userid=request.session['user_id']
     luis=request.GET.get("luis")
     print("luis = ",luis)
     response = requests.get(
@@ -41,7 +42,7 @@ def selected(request):
     luisdata = jjj.loads(response.text)
     data = []
     nonumbercheck3 = []
-    datas = Classified.objects.all()
+    datas = Classified.objects.filter(image_owner=userid)
     for d in datas:
         data.append(d.image_path)
     data3 = data
@@ -207,9 +208,10 @@ def selected(request):
 
     
 
-def gallery(request):
+def search(request):
     now=datetime.datetime.now()
-    datas=Classified.objects.all()
+    userid=request.session["user_id"]
+    datas=Classified.objects.filter(image_owner=userid)
     try:
         del request.session['queryset']
     except:
@@ -296,6 +298,10 @@ def upload(request):
 
         a=recognize_faces_image.readPara("home/dlib/encoding/encoding_all_nj1_300p.pickle",f'home/static/images/{myfile.name}','hog',0.45)
         a=dict(a)
+        # print("a",a)
+        owner=request.session["user_id"]
+        b={"image_owner_id":owner}
+        a.update(b)
         print("a",a)
 
         dataset=[]
@@ -338,18 +344,55 @@ def httpget(request):
     now=datetime.datetime.now()
     return HttpResponse(f"HELLO {name},{age}")
 
-
 def signup(request):
-    
-
+    if request.method == 'POST':
+        username=request.POST['username']
+        user_id=request.POST['user_id']
+        social_id=request.POST['social_id']
+        password=request.POST['password']
+        email=request.POST['email']
+        phone_number=request.POST['phone_number']
+        Members.objects.create(username=username,user_id=user_id,social_id=social_id,
+        password=password,email=email,phone_number=phone_number)
+        message ="Hi~ Welcome to X-Photohub,relogin tks!"
+        return render(request,'home/index.html',locals())
     now=datetime.datetime.now()
     return render(request,'signup.html')
 
 def login(request):
+    if request.method == 'POST':
+        user_id = request.POST['user_id']
+        password = request.POST['password']
+        try:
+            member_password = Members.objects.get(user_id=user_id).password
+            # print(member.password)
+                # pass = member.password
+                # if user_id == member[0].user_id\
+            
+        except:
+            message= 'please registry first'
+            return render(request,'login.html',locals())
 
+        if password == member_password:
+            print(user_id)
+            request.session['user_id'] = user_id
+            return render(request,'home/index.html',locals())
+        
+        message="password error"
+        return render(request,'login.html',locals())
+        
+    else:
+        now=datetime.datetime.now()
+        message= 'Welcome Guest'
+        return render(request,'login.html',locals())
 
-    now=datetime.datetime.now()
-    return render(request,'login.html')
+def logout(request):
+    if 'user_id' in request.session:
+        del request.session['user_id']
+    else:
+        return render(request,'home/index.html',locals())
+    return render(request,'home/index.html',locals())
+
 
 
 def tryaudio(request):
