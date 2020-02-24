@@ -74,7 +74,10 @@ def selected(request):
                 print("keyword" ,keyword)
                 engindex = []
                 engkey = []
+                userid=request.session['user_id']
+                ownerkey={"image_owner":userid}
                 cowlist = {}
+                cowlist.update(ownerkey)
                 for i in keyword:
                     if i in a:
                         engindex.append(a.index(i))
@@ -98,8 +101,12 @@ def selected(request):
                     else:
                         cowlist[engkey[i]] = keywordnumber[i]
                     cowlist2 = {}
+                    userid=request.session['user_id']
+                    ownerkey={"image_owner":userid}
+                    
                     cowlist2[engkey[i]] = keywordnumber[i]
                     print(cowlist2)
+                    cowlist2.update(ownerkey)
                     nonumbercheck = Classified.objects.filter(**cowlist2)
                     print(nonumbercheck)
                     nonumbercheck2 = []
@@ -108,6 +115,7 @@ def selected(request):
                         print(nonumbercheck2)
                     nonumbercheck3 = list(set(nonumbercheck2 + nonumbercheck3))
                     print("nonumbercheck3 = ",nonumbercheck3)
+                
                     
                 if nonumber:
                     nonumbercheck3 = list(set(data3) - set(nonumbercheck3))
@@ -133,10 +141,14 @@ def selected(request):
                         return render(request,'select.html',locals())
 
                 else:
+                    
                     if intent == "正面":
                         datas=Classified.objects.filter(**cowlist)
                     elif intent == "負面":
-                        datas=Classified.objects.exclude(**cowlist)
+                        del cowlist['image_owner']
+                        datas=Classified.objects.filter(image_owner=userid).exclude(**cowlist)
+
+
 
                 # if intent == "正面":
                 #     if nonumber:
@@ -296,17 +308,17 @@ def upload(request):
         # YoloTest.evaluate(f'home/static/images/{myfile.name}')
         YoloTest.evaluate(path_head,img_path)
 
-        a=recognize_faces_image.readPara("home/dlib/encoding/encoding_all_nj1_300p.pickle",f'home/static/images/{myfile.name}','hog',0.45)
-        a=dict(a)
+        dlib_counter=recognize_faces_image.readPara("home/dlib/encoding/encoding_all_nj1_300p.pickle",f'home/static/images/{myfile.name}','hog',0.45)
+        dlib_dict=dict(dlib_counter)
         # print("a",a)
         owner=request.session["user_id"]
-        b={"image_owner_id":owner}
-        a.update(b)
-        print("a",a)
+        ownerkey={"image_owner_id":owner}
+        dlib_dict.update(ownerkey)
+        print("a",dlib_dict)
 
         dataset=[]
         for i in YoloTest.dlist:
-            i.update(a)
+            i.update(dlib_dict)
             dataset.append(i)
         print("dataset",dataset)
        
