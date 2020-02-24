@@ -27,9 +27,11 @@
 
 </form>
 {% for data in output_imagepath %}
-
+<div class="ml-3" style="display:inline">
+    <img id="gla" style="max-width: 200px;" src="{% static data %}" alt="">
+</div>
 <!-- <div class="ml-3 mb-5" style="float: left;"><img id="gla" style="max-width: 200px;" src="{% static data.image_path %}" alt=""></div> -->
-<div class="ml-3 mb-5" style="float: left;"><img id="gla" style="max-width: 200px;" src="{% static data %}" alt=""></div>
+
 {% endfor %}
 
 
