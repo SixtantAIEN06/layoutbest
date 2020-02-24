@@ -6,22 +6,22 @@
 
 <form action="/selected/" method="get">
 
-    <div class="form-group">
-        <!-- <label for="typename">Class name</label>
+  <div class="form-group">
+    <!-- <label for="typename">Class name</label>
                 <input type="text" name="searchname" class="form-control" id="typename">
         </div> -->
-        <!-- <div class="form-group">
+    <!-- <div class="form-group">
                 <label for="numbersinput">Numbers</label>
                 <input type="text" name="nums" class="form-control" id="numbersinput"> -->
-        <label for="typename">語意分析用</label>
-        <input type="text" name="luis" class="form-control" id="luis">
-    </div>
-    <button type="submit" class="btn btn-primary nt-3">Submit</button>
+    <label for="typename">語意分析用</label>
+    <input type="text" name="luis" class="form-control" id="luis">
+  </div>
+  <button type="submit" class="btn btn-primary nt-3">Submit</button>
 
 
 </form>
-
 {% for data in datas%}
+<<<<<<< HEAD
 
 <!-- <div class="ml-3" style="float: left; z-index: auto;">
     <a href="{% static data.image_path %}" data-toggle="lightbox" data-gallery="gallery" class="col-md-4">
@@ -29,22 +29,17 @@
     </a>
 </div> -->
 
+=======
+>>>>>>> e037bf696f7b4a6e387eeaa4f0e566b87a148780
 <div class="ml-3" style="display:inline">
   <a href="{% static data.image_path %}" data-toggle="lightbox" data-gallery="gallery" class="col-md-4">
       <img id="gla" src="{% static data.image_path %}" style="max-width: 200px;" alt="">
   </a>
 </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> e037bf696f7b4a6e387eeaa4f0e566b87a148780
 {% endfor %}
 
-<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script type="text/javascript" src="slick/slick.min.js"></script>
-<script type="text/javascript">
-    $(document).ready(function(){
-      $('.your-class').slick({
-        setting-name: setting-value
-      });
-    });
-  </script>
 {% endblock%}

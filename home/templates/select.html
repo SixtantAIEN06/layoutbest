@@ -23,13 +23,15 @@
         <input type="text" name="luis" class="form-control" id="luis">
     </div>
     <button type="submit" class="btn btn-primary nt-3">Submit</button>
-    <a class="btn btn-primary nt-3" href="/gallery">Clean</a>
+    <a class="btn btn-primary nt-3" href="/search">Clean</a>
 
 </form>
 {% for data in output_imagepath %}
-
+<div class="ml-3" style="display:inline">
+    <img id="gla" style="max-width: 200px;" src="{% static data %}" alt="">
+</div>
 <!-- <div class="ml-3 mb-5" style="float: left;"><img id="gla" style="max-width: 200px;" src="{% static data.image_path %}" alt=""></div> -->
-<div class="ml-3 mb-5" style="float: left;"><img id="gla" style="max-width: 200px;" src="{% static data %}" alt=""></div>
+
 {% endfor %}
 
 
