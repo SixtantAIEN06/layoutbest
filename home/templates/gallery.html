@@ -29,13 +29,11 @@
     </a>
 </div> -->
 
-<div class="your-class" style="width: 360px; height: 270px;float: left; z-index: auto;">
-    <img id="gla" src="{% static data.image_path %}" style="max-height:100%;max-width:100%;position: relative;" class="card-img-top mx-auto d-block" alt="">
-*9+-
-    <!-- <div class="card-body">
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    </div> -->
-  </div>
+<div class="ml-3" style="display:inline">
+  <a href="{% static data.image_path %}" data-toggle="lightbox" data-gallery="gallery" class="col-md-4">
+      <img id="gla" src="{% static data.image_path %}" style="max-width: 200px;" alt="">
+  </a>
+</div>
 
 {% endfor %}
 

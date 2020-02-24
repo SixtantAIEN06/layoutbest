@@ -8,6 +8,8 @@ from .BeautyGAN import split as beautysplit
 import cv2
 import glob
 import os
+from PIL import Image
+import random, string
 # import subprocess
 import tensorflow as tf
 import datetime
@@ -27,11 +29,16 @@ YoloTest = YoloTest()
 
 # Create your views here.
 def index(request):
+    if 'user_id' not in request.session:
+        return redirect('/')
     now=datetime.datetime.now()
     #return HttpResponse("<p>Hello world!</p>")
     return render(request,'home/index.html', locals())
 
+
 def selected(request):
+    if 'user_id' not in request.session:
+        return redirect('/')
     # searchname=request.GET.get("searchname")
     userid=request.session['user_id']
     luis=request.GET.get("luis")
@@ -208,7 +215,9 @@ def selected(request):
 
     
 
-def search(request):
+def gallery(request):
+    if 'user_id' not in request.session:
+        return redirect('/')
     now=datetime.datetime.now()
     userid=request.session["user_id"]
     datas=Classified.objects.filter(image_owner=userid)
@@ -224,7 +233,10 @@ def search(request):
 
     return render(request,'gallery.html',locals())
 
+
 def facerecognition(request):
+    if 'user_id' not in request.session:
+        return redirect('/')
     date=datetime.datetime.now()
     print('face begin')
     if request.method =='POST' and request.FILES['photoupload']:
@@ -244,7 +256,8 @@ def facerecognition(request):
 
 
 def styletransfer(request):
-     
+    if 'user_id' not in request.session:
+        return redirect('/')
     if request.method =='POST' and request.FILES['photoupload']:
         myfile=request.FILES['photoupload']
         fs = FileSystemStorage(location='home/static/images/')
@@ -267,15 +280,56 @@ def styletransfer(request):
     now = datetime.datetime.now()
     return render(request,'layout.html',locals())
     
+
 def styletransfer2(request):
+    if 'user_id' not in request.session:
+        return redirect('/')
     date=datetime.datetime.now()
     if request.method =='POST' and request.POST["style"]:
-        beautysplit.split(request.POST["style"])
+        userid=request.session["user_id"]
+        beautysplit.split(request.POST["style"],userid)
         makeups = glob.glob(os.path.join('home','static','makeupstyle','*'))
         photopath="./home/static/temp/split.jpg"
         # stylephoto=os.listdir("./home/static/makeupstyle")
         # print(stylephoto)
         title = "SELECT THE STYLE YOU LIKE!"
+        if request.method =='POST' and request.POST["style"]=='style999':
+            im=Image.open('./home/static/temp/split.jpg')
+
+            picname=''.join(random.choice(string.ascii_letters + string.digits) for x in range(10))
+            im.save(f'./home/static/images/{picname}.jpg') 
+            path_head='home/static/'
+            img_path=f'images/{picname}.jpg'
+            # YoloTest.evaluate(f'home/static/images/{myfile.name}')
+            YoloTest.evaluate(path_head,img_path)
+
+            a=recognize_faces_image.readPara("home/dlib/encoding/encoding_all_nj1_300p.pickle",f'home/static/images/{picname}.jpg','hog',0.45)
+            a=dict(a)
+            print("a",a)
+            id={}
+            id["image_owner_id"]=userid
+            a.update(id)
+            dataset=[]
+            for i in YoloTest.dlist:
+                i.update(a)
+                dataset.append(i)
+            print("dataset",dataset)
+            
+            # print("a+list",dict(YoloTest.dlist))
+            for item in YoloTest.dlist:
+                print("========================================")
+                print(item)
+                print("========================================")
+                
+                sort =Classified.objects.create(**item)
+                sort .save()
+            # beautysplit.split(request.POST["style"],userid)
+
+
+
+
+
+            return redirect('/gallery/')  
     # elif os.path('./home/static/temp/split.jpg'):
     #     os.remove('./home/static/temp/split.jpg')  
     
@@ -284,6 +338,8 @@ def styletransfer2(request):
         
 
 def upload(request):
+    if 'user_id' not in request.session:
+        return redirect('/')
     date=datetime.datetime.now()
     if request.method =='POST' and request.FILES['photoupload']:
         myfile=request.FILES['photoupload']
@@ -329,6 +385,7 @@ def delmypic(request):
     now=datetime.datetime.now()
     return render(request,'delmypic.html',locals())
 
+
 def json(request):
     # if request.method =='POST':
     datas={"name":"ford","age":"31"}
@@ -352,17 +409,33 @@ def signup(request):
         password=request.POST['password']
         email=request.POST['email']
         phone_number=request.POST['phone_number']
-        Members.objects.create(username=username,user_id=user_id,social_id=social_id,
-        password=password,email=email,phone_number=phone_number)
-        message ="Hi~ Welcome to X-Photohub,relogin tks!"
-        return render(request,'home/index.html',locals())
+        try:
+            Members.objects.create(username=username,user_id=user_id,
+            social_id=social_id,password=password,email=email,phone_number=phone_number)
+
+        except:
+            message="Acount already exist!"
+            request.session["message"]=message
+            return redirect("/login/",locals())
+
+        if "message" not in request.session:
+            message ="Hi~ Welcome to X-Photohub,relogin tks!"
+            request.session["message"]=message
+        # return render(request,'home/index.html',locals())
+        return redirect("/menu/")
+    if "message" in request.session:
+        del request.session["message"]
     now=datetime.datetime.now()
+    if "user_id" in request.session:
+        del request.session["use_id"]
     return render(request,'signup.html')
+
 
 def login(request):
     if request.method == 'POST':
         user_id = request.POST['user_id']
         password = request.POST['password']
+
         try:
             member_password = Members.objects.get(user_id=user_id).password
             # print(member.password)
@@ -376,24 +449,41 @@ def login(request):
         if password == member_password:
             print(user_id)
             request.session['user_id'] = user_id
-            return render(request,'home/index.html',locals())
+            return redirect('/menu')
         
         message="password error"
         return render(request,'login.html',locals())
         
     else:
+        # a=request.META.get('HTTP_REFERER')
+       
+        # print(type(a))
+        # print(a)
+        if "user_id" in request.session:
+            return redirect("/menu")
+        
         now=datetime.datetime.now()
         message= 'Welcome Guest'
         return render(request,'login.html',locals())
+
 
 def logout(request):
     if 'user_id' in request.session:
         del request.session['user_id']
     else:
         return render(request,'home/index.html',locals())
-    return render(request,'home/index.html',locals())
-
+    return render(request,'first.html',locals())
 
 
 def tryaudio(request):
     return render(request,'tryaudioandcam.html')
+    
+
+def first(request):
+    return render(request,'first.html')
+
+
+def menu(request):
+    if 'user_id' not in request.session:
+        return redirect('/')
+    return render(request,'menu.html')

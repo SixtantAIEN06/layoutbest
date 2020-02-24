@@ -20,6 +20,9 @@ def deprocess(img):
 
 def beauty(image):
     global rect2
+    if os.path.exists('home/static/temp/before.jpg'):
+        print("++++++++++++++++++++++=====================")
+        os.remove('./home/static/temp/before.jpg')
     im=Image.open(image)
     image=im.convert('RGB')
     image.save('./home/static/temp/toRGB.jpg')
@@ -42,7 +45,7 @@ def beauty(image):
     for (face_num,(x, y, w, h)) in enumerate(rects):
         img = cv2.imread('./home/static/temp/before.jpg')
 
-        if x>(w//8):
+        if x>(w//8) and (org_w-x-w)>(w//8):
             x_=x-w//8  
             w_=w+w//8*2
         else:
@@ -50,7 +53,7 @@ def beauty(image):
             w_=w
 
                                  #放大臉抓取範圍
-        if y>(h//8):
+        if y>(h//8) and (org_h-y-h)>(h//8):
             y_=y-h//8
             h_=h+h//8*2  
         else:
@@ -62,11 +65,13 @@ def beauty(image):
         dimface = np.matrix([[p.x, p.y] for p in predictor(img, rect).parts()])
         dimface2=np.array(dimface[:17])         #下巴17個點+眉毛左右各3
         for i in range(3):
-            if x>(w//8) and y>(h//8):
-                dimface[26-i]=dimface[26-i]-[-w_//8,w_//8]   #抓到眉毛以上
+            if x>(w//8) and y>(h//8) and (org_h-y-h)>(h//8) and (org_w-x-w)>(w//8):
+                dimface[26-i]=dimface[26-i]-[-w_//16,w_//8]   #抓到眉毛以上
+            dimface2=np.append(dimface2,dimface[26-i],0)
+            
         for i in range(3):
-            if x>(w//8) and y>(h//8):
-                dimface[26-i]=dimface[19-i]-[w_//8,w_//8]
+            if x>(w//8) and y>(h//8) and (org_h-y-h)>(h//8) and (org_w-x-w)>(w//8):
+                dimface[19-i]=dimface[19-i]-[w_//16,w_//8]
             dimface2=np.append(dimface2,dimface[19-i],0)
 
         face_mask_w=dimface2[np.argmax(dimface2,0)][0][0,0]-dimface2[np.argmin(dimface2,0)][0][0,0];
