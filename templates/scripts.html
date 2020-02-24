@@ -1,0 +1,439 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script>
+
+  function submitXML() {
+    var fileInput = $('#inputGroupFile01').get(0).files[0];
+    console.info(fileInput);
+    if (fileInput) {
+      $("#photouploadButton")[0].style.display = 'none';
+      $("#photouploadButton1").submit();
+      $("#warnforpic").text("")
+    } else {
+      $("#warnforpic").text("請選擇上傳檔案！");
+      return false;
+    }
+  }
+  /// preview photo
+  $("#inputGroupFile01").change(function (event) {
+    RecurFadeIn();
+    readURL(this);
+  });
+  $("#inputGroupFile01").on('click', function (event) {
+    RecurFadeIn();
+  });
+  function readURL(input) {
+    console.log('yeeaah')
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      var filename = $("#inputGroupFile01").val();
+      filename = filename.substring(filename.lastIndexOf('\\') + 1);
+      reader.onload = function (e) {
+        debugger;
+        $('#blah').attr('src', e.target.result);
+        $('#blah').hide();
+        $('#blah').fadeIn(500);
+        $('.custom-file-label').text(filename);
+      }
+      reader.readAsDataURL(input.files[0]);
+    }
+    $(".alert").removeClass("loading").hide();
+  }
+  function RecurFadeIn() {
+    console.log('ran');
+    FadeInAlert("Wait for it...");
+  }
+  function FadeInAlert(text) {
+    $(".alert").show();
+    $(".alert").text(text).addClass("loading");
+  }
+
+  $(document).ready(function () {
+
+    $('#json').click(function () {
+      var url = 'json'
+      $.get(url, function (datas) {
+        console.log(datas)
+      })
+
+    })
+
+  })
+
+
+  $(document).ready(function () {
+
+    $('#httpget').click(
+      function () {
+        var url = 'httpget'
+        $.get(url, { "name": "ford", "age": 31 }, function (datas) {
+          $("#show").text(datas)
+        })
+      })
+  })
+
+
+  $(document).ready(function () {
+    $(':radio').click(function () {
+      $("#submitclick").click();
+
+      // $("form").on("submit", function (event) {
+
+      // });
+
+
+    })
+  })
+
+  i = 1;
+  $(window).scroll(function () {
+    $('.earth').attr('style', 'transform: rotate(' + (60 + i * 5) + 'deg);');
+    i++;
+  });
+  //     $('.earth').click(function() {
+
+
+  // });
+
+  /// 登入頁面 script
+
+  $(function () {
+    var cities = ['基隆市', '台北市', '新北市', '桃園市', '新竹市', '新竹縣', '苗栗縣', '台中市', '彰化縣', '南投縣', '雲林縣', '嘉義市', '嘉義縣', '台南市', '高雄市', '屏東縣', '台東縣', '花蓮縣', '宜蘭縣', '澎湖縣'],
+      dist01 = ['中正區', '七堵區', '暖暖區', '仁愛區', '中山區', '安樂區', '信義區'],
+      dist02 = ['中正區', '大同區', '中山區', '松山區', '大安區', '萬華區', '信義區', '士林區', '北投區', '內湖區', '南港區', '文山區'],
+      dist03 = ['板橋區', '中和區', '永和區', '土城區', '三峽區', '鶯歌區', '樹林區', '新莊區', '三重區', '蘆洲區', '五股區', '泰山區', '林口區', '八里區', '淡水區', '三芝區', '石門區', '金山區', '萬里區', '汐止區', '瑞芳區', '貢寮區', '平溪區', '雙溪區', '新店區', '深坑區', '石碇區', '坪林區', '烏來區'],
+      dist04 = ['桃園區', '龜山區', '八德區', '大溪區', '蘆竹區', '大園區', '中壢區', '龍潭區', '平鎮區', '楊梅區', '新屋區', '觀音區', '復興區'],
+      dist05 = ['東區', '北區', '香山區'],
+      dist06 = ['竹北區', '關西鎮', '新埔鎮', '竹東鎮', '湖口鄉', '橫山鄉', '新豐鄉', '芎林鄉', '寶山鄉', '北埔鄉', '峨眉鄉', '尖石鄉', '五峰鄉'],
+      dist07 = ['苗栗市', '頭份市', '苑裡鎮', '通霄鎮', '竹南鎮', '後龍鎮', '卓蘭鎮', '大湖鄉', '公館鄉', '銅鑼鄉', '南庄鄉', '頭屋鄉', '三義鄉', '西湖鄉', '造橋鄉', '三灣鄉', '獅潭鄉', '泰安鄉'],
+      dist08 = ['中區', '東區', '西區', '南區', '北區', '北屯區', '南屯區', '西屯區', '太平區', '大里區', '霧峰區', '烏日區', '豐原區', '后里區', '石岡區', '東勢區', '和平區', '新社區', '潭子區', '大雅區', '神岡區', '大肚區', '龍井區', '沙鹿區', '梧棲區', '清水區', '大甲區', '外埔區', '大安區',],
+      dist09 = ['彰化市', '員林市', '鹿港鎮', '和美鎮', '北斗鎮', '溪湖鎮', '田中鎮', '二林鎮', '線西鄉', '伸港鄉', '福興鄉', '秀水鄉', '花壇鄉', '芬園鄉', '大村鄉', '埔鹽鄉', '埔心鄉', '永靖鄉', '社頭鄉', '二水鄉', '田尾鄉', '埤頭鄉', '芳苑鄉', '大城鄉', '竹塘鄉', '溪州鄉',]
+    dist10 = ['南投市', '埔里鎮', '草屯鎮', '竹山鎮', '集集鎮', '名間鄉', '鹿谷鄉', '中寮鄉', '魚池鄉', '國姓鄉', '水里鄉', '信義鄉', '仁愛鄉'],
+      dist11 = ['斗六市', '斗南鎮', '虎尾鎮', '西螺鎮', '土庫鎮', '北港鎮', '古坑鄉', '大埤鄉', '莿桐鄉', '林內鄉', '二崙鄉', '崙背鄉', '麥寮鄉', '東勢鄉', '褒忠鄉', '台西鄉', '元長鄉', '四湖鄉', '口湖鄉', '水林鄉'],
+      dist12 = ['東區', '西區'],
+      dist13 = ['太保市', '朴子市', '布袋鎮', '大林鎮', '民雄鎮', '溪口鄉', '新港鄉', '六腳鄉', '東石鄉', '義竹鄉', '鹿草鄉', '水上鄉', '中埔鄉', '竹崎鄉', '梅山鄉', '番路鄉', '大埔鄉', '阿里山鄉'],
+      dist14 = ['中西區', '東區', '南區', '北區', '安平區', '安南區', '新營區', '鹽水區', '白河區', '柳營區', '後壁區', '東山區', '麻豆區', '下營區', '六甲區', '官田區', '大內區', '佳里區', '學甲區', '西港區', '七股區', '將軍區', '北門區', '新化區', '善化區', '新市區',
+        '安定區', '山上區', '玉井區', '楠西區', '南化區', '左鎮區', '仁德區', '歸仁區', '關廟區', '龍崎區', '永康區'],
+      dist15 = ['鹽埕區', '鼓山區', '左營區', '楠梓區', '三民區', '新興區', '前金區', '苓雅區', '前鎮區', '旗津區', '小港區', '鳳山區', '林園區', '大寮區', '大樹區', '大社區', '仁武區', '鳥松區', '岡山區', '橋頭區', '燕巢區', '田寮區', '阿蓮區', '路竹區', '湖內區', '茄萣區', '永安區', '彌陀區', '梓官區', '旗山區', '美濃區', '六龜區',
+        '甲仙區', '杉林區', '內門區', '茂林區', '桃源區', '那瑪夏區'],
+      dist16 = ['屏東市', '潮州鎮', '東港鎮', '恆春鎮', '萬丹鄉', '長治鄉', '麟洛鄉', '九如鄉', '里港鄉', '埔鹽鄉', '高樹鄉', '萬巒鄉', '內埔鄉', '竹田鄉', '新埤鄉', '枋寮鄉', '新園鄉', '崁頂鄉', '林邊鄉', '南州鄉', '佳冬鄉', '琉球鄉', '車城鄉', '滿州鄉', '枋山鄉', '三地門鄉', '霧台鄉', '瑪家鄉', '泰武鄉', '來義鄉', '春日鄉', '獅子鄉',
+        '牡丹鄉'],
+      dist17 = ['台東市', '成功鎮', '關山鎮', '卑南鄉', '大武鄉', '太麻里鄉', '東河鄉', '長濱鄉', '鹿野鄉', '池上鄉', '綠島鄉', '延平鄉', '海端鄉', '達仁鄉', '金峰鄉', '蘭嶼鄉'],
+      dist18 = ['花蓮市', '鳳林鎮', '玉里鎮', '新城鄉', '吉安鄉', '壽豐鄉', '光復鄉', '豐濱鄉', '瑞穗鄉', '富里鄉', '秀林鄉', '萬榮鄉', '卓溪鄉'],
+      dist19 = ['宜蘭市', '羅東鎮', '蘇澳鎮', '頭城鎮', '礁溪鄉', '壯圍鄉', '員山鄉', '冬山鄉', '五結鄉', '三星鄉', '大同鄉', '南澳鄉'],
+      dist20 = ['馬公市', '湖西鄉', '白沙鄉', '西嶼鄉', '望安鄉', '七美鄉'],
+      dist21 = ['南竿鄉', '北竿鄉', '莒光鄉', '東引鄉'],
+      dist22 = ['金城鎮', '金湖鄉', '金沙鎮', '金寧鄉', '烈嶼鄉', '烏坵鄉']
+
+
+    distset = [dist01, dist02, dist03, dist04, dist05, dist06, dist07, dist08, dist09, dist10, dist11, dist12, dist13, dist14, dist15, dist16, dist17, dist18, dist19, dist20, dist21, dist22];
+
+    $.each(cities, function (i, el) {
+      $('select[name=city]').append(`<option value="${cities[i]}">${cities[i]}</option>`);
+    });
+
+  });
+  var submitfunction = function () {
+
+    if ($("#user_id").val() == "") {
+      alert("你尚未填寫姓名");
+      eval("document.form1['user'].focus()");
+    } else if ($("#password").val() == "") {
+      alert("你尚未填寫pwd");
+      eval("document.form1['password'].focus()");
+    } else if ($("#password").val() != $('#password2').val()) {
+      alert('密碼不一致！')
+      eval("document.form1['password'].focus()")
+    } else if ($("#email").val() == "") {
+      alert("你尚未填寫電子郵件地址");
+      eval("document.form1['email'].focus()");
+    } else if ($("#addr").val() == "") {
+      alert("你尚未填寫地址");
+      eval("document.form1['addr'].focus()");
+    } else if ($("#ident").val() == "") {
+      alert("你尚未填寫id");
+      eval("document.form1['ident'].focus()");
+    } else {
+      if (identget() == true) {
+        document.form1.submit();
+      } else {
+        alert("請確認身分證!");
+      }
+
+    }
+    return false
+  };
+
+  var listener = function () {
+    var cities = ['基隆市', '台北市', '新北市', '桃園市', '新竹市', '新竹縣', '苗栗縣', '台中市', '彰化縣', '南投縣', '雲林縣', '嘉義市', '嘉義縣', '台南市', '高雄市', '屏東縣', '台東縣', '花蓮縣', '宜蘭縣', '澎湖縣', '連江縣', '金門縣'],
+      dist01 = ['中正區', '七堵區', '暖暖區', '仁愛區', '中山區', '安樂區', '信義區'],
+      dist02 = ['中正區', '大同區', '中山區', '松山區', '大安區', '萬華區', '信義區', '士林區', '北投區', '內湖區', '南港區', '文山區'],
+      dist03 = ['板橋區', '中和區', '永和區', '土城區', '三峽區', '鶯歌區', '樹林區', '新莊區', '三重區', '蘆洲區', '五股區', '泰山區', '林口區', '八里區', '淡水區', '三芝區', '石門區', '金山區', '萬里區', '汐止區', '瑞芳區', '貢寮區', '平溪區', '雙溪區', '新店區', '深坑區', '石碇區', '坪林區', '烏來區'],
+      dist04 = ['桃園區', '龜山區', '八德區', '大溪區', '蘆竹區', '大園區', '中壢區', '龍潭區', '平鎮區', '楊梅區', '新屋區', '觀音區', '復興區'],
+      dist05 = ['東區', '北區', '香山區'],
+      dist06 = ['竹北區', '關西鎮', '新埔鎮', '竹東鎮', '湖口鄉', '橫山鄉', '新豐鄉', '芎林鄉', '寶山鄉', '北埔鄉', '峨眉鄉', '尖石鄉', '五峰鄉'],
+      dist07 = ['苗栗市', '頭份市', '苑裡鎮', '通霄鎮', '竹南鎮', '後龍鎮', '卓蘭鎮', '大湖鄉', '公館鄉', '銅鑼鄉', '南庄鄉', '頭屋鄉', '三義鄉', '西湖鄉', '造橋鄉', '三灣鄉', '獅潭鄉', '泰安鄉'],
+      dist08 = ['中區', '東區', '西區', '南區', '北區', '北屯區', '南屯區', '西屯區', '太平區', '大里區', '霧峰區', '烏日區', '豐原區', '后里區', '石岡區', '東勢區', '和平區', '新社區', '潭子區', '大雅區', '神岡區', '大肚區', '龍井區', '沙鹿區', '梧棲區', '清水區', '大甲區', '外埔區', '大安區',],
+      dist09 = ['彰化市', '員林市', '鹿港鎮', '和美鎮', '北斗鎮', '溪湖鎮', '田中鎮', '二林鎮', '線西鄉', '伸港鄉', '福興鄉', '秀水鄉', '花壇鄉', '芬園鄉', '大村鄉', '埔鹽鄉', '埔心鄉', '永靖鄉', '社頭鄉', '二水鄉', '田尾鄉', '埤頭鄉', '芳苑鄉', '大城鄉', '竹塘鄉', '溪州鄉',]
+    dist10 = ['南投市', '埔里鎮', '草屯鎮', '竹山鎮', '集集鎮', '名間鄉', '鹿谷鄉', '中寮鄉', '魚池鄉', '國姓鄉', '水里鄉', '信義鄉', '仁愛鄉'],
+      dist11 = ['斗六市', '斗南鎮', '虎尾鎮', '西螺鎮', '土庫鎮', '北港鎮', '古坑鄉', '大埤鄉', '莿桐鄉', '林內鄉', '二崙鄉', '崙背鄉', '麥寮鄉', '東勢鄉', '褒忠鄉', '台西鄉', '元長鄉', '四湖鄉', '口湖鄉', '水林鄉'],
+      dist12 = ['東區', '西區'],
+      dist13 = ['太保市', '朴子市', '布袋鎮', '大林鎮', '民雄鎮', '溪口鄉', '新港鄉', '六腳鄉', '東石鄉', '義竹鄉', '鹿草鄉', '水上鄉', '中埔鄉', '竹崎鄉', '梅山鄉', '番路鄉', '大埔鄉', '阿里山鄉'],
+      dist14 = ['中西區', '東區', '南區', '北區', '安平區', '安南區', '新營區', '鹽水區', '白河區', '柳營區', '後壁區', '東山區', '麻豆區', '下營區', '六甲區', '官田區', '大內區', '佳里區', '學甲區', '西港區', '七股區', '將軍區', '北門區', '新化區', '善化區', '新市區',
+        '安定區', '山上區', '玉井區', '楠西區', '南化區', '左鎮區', '仁德區', '歸仁區', '關廟區', '龍崎區', '永康區'],
+      dist15 = ['鹽埕區', '鼓山區', '左營區', '楠梓區', '三民區', '新興區', '前金區', '苓雅區', '前鎮區', '旗津區', '小港區', '鳳山區', '林園區', '大寮區', '大樹區', '大社區', '仁武區', '鳥松區', '岡山區', '橋頭區', '燕巢區', '田寮區', '阿蓮區', '路竹區', '湖內區', '茄萣區', '永安區', '彌陀區', '梓官區', '旗山區', '美濃區', '六龜區',
+        '甲仙區', '杉林區', '內門區', '茂林區', '桃源區', '那瑪夏區'],
+      dist16 = ['屏東市', '潮州鎮', '東港鎮', '恆春鎮', '萬丹鄉', '長治鄉', '麟洛鄉', '九如鄉', '里港鄉', '埔鹽鄉', '高樹鄉', '萬巒鄉', '內埔鄉', '竹田鄉', '新埤鄉', '枋寮鄉', '新園鄉', '崁頂鄉', '林邊鄉', '南州鄉', '佳冬鄉', '琉球鄉', '車城鄉', '滿州鄉', '枋山鄉', '三地門鄉', '霧台鄉', '瑪家鄉', '泰武鄉', '來義鄉', '春日鄉', '獅子鄉',
+        '牡丹鄉'],
+      dist17 = ['台東市', '成功鎮', '關山鎮', '卑南鄉', '大武鄉', '太麻里鄉', '東河鄉', '長濱鄉', '鹿野鄉', '池上鄉', '綠島鄉', '延平鄉', '海端鄉', '達仁鄉', '金峰鄉', '蘭嶼鄉'],
+      dist18 = ['花蓮市', '鳳林鎮', '玉里鎮', '新城鄉', '吉安鄉', '壽豐鄉', '光復鄉', '豐濱鄉', '瑞穗鄉', '富里鄉', '秀林鄉', '萬榮鄉', '卓溪鄉'],
+      dist19 = ['宜蘭市', '羅東鎮', '蘇澳鎮', '頭城鎮', '礁溪鄉', '壯圍鄉', '員山鄉', '冬山鄉', '五結鄉', '三星鄉', '大同鄉', '南澳鄉'],
+      dist20 = ['馬公市', '湖西鄉', '白沙鄉', '西嶼鄉', '望安鄉', '七美鄉'],
+      dist21 = ['南竿鄉', '北竿鄉', '莒光鄉', '東引鄉'],
+      dist22 = ['金城鎮', '金湖鄉', '金沙鎮', '金寧鄉', '烈嶼鄉', '烏坵鄉']
+    distset = [dist01, dist02, dist03, dist04, dist05, dist06, dist07, dist08, dist09, dist10, dist11, dist12, dist13, dist14, dist15, dist16, dist17, dist18, dist19, dist20, dist21, dist22];
+
+    var cityVal = $('#city').val();
+    // //判斷城市 清除原有選項並 遍歷 加入所屬區域的option
+    for (var i = 0; i < cities.length; i++) {
+
+      if (cities[i] == cityVal) {
+        $('#dist1 option').remove();
+        $.each(distset[i], function (k, el) {
+          $('#dist1').append(`<option value="${distset[i][k]}">${distset[i][k]}</option>`);
+
+        })
+      }
+    }
+  };
+
+  var fulfilladdress = function () {
+
+    var fulladdress = $('#city option:selected').text();
+    fulladdress += $('#dist1 option:selected').text();
+    $('#address').val(fulladdress);
+
+  };
+
+  checkall = function () {
+    if ($('#interestall').prop('checked') == true) {
+      $(':checkbox[name="interest"]').prop('checked', true);
+    } else {
+      $(':checkbox[name="interest"]').prop('checked', false);
+    }
+
+  };
+
+  checkeach = function () {
+    allinterestlist = $(':checkbox[name=interest]').length - 1;
+    // console.log(allinterestlist);
+    if ($(':checkbox[name=interest] :checked').length < allinterestlist) {
+      $('#interestall').prop('checked', false);
+    } else {
+
+      // $('#interestall').prop('checked',true);
+    }
+
+  };
+
+  // var a = 10, b = 11, c = 12, d = 13, e = 14, f = 15,
+  // g = 16, h = 17, j = 18, k = 19, l = 20,
+  // m = 21, n = 22, p = 23, q = 24, r = 25,
+  // s = 26, t = 27, u = 28, v = 29, x = 30,
+  // y = 31, z = 33, i = 34, o = 35,
+  var total, residue, lits, small,
+    identget = function () {
+      var textId = $('[name=id_number]').val();
+
+      var numeric9 = parseInt(textId.substr(9, 1)); //1
+
+      var numeric8 = parseInt(textId.substr(8, 1)); //1
+
+      var numeric7 = parseInt(textId.substr(7, 1)); //2
+
+      var numeric6 = parseInt(textId.substr(6, 1)); //3
+
+      var numeric5 = parseInt(textId.substr(5, 1)); //4
+
+      var numeric4 = parseInt(textId.substr(4, 1)); //5
+
+      var numeric3 = parseInt(textId.substr(3, 1)); //6
+
+      var numeric2 = parseInt(textId.substr(2, 1)); //7
+
+      var numeric1 = parseInt(textId.substr(1, 1)); // 8
+
+      var capital = textId.substr(0, 1); // 1 9
+
+      total = numeric8 + numeric7 * 2 + numeric6 * 3 + numeric5 * 4 + numeric4 * 5 + numeric3 * 6 + numeric2 * 7 + numeric1 * 8;
+      small = capital.toLowerCase();
+
+
+      if (small == 'a') {
+        // a = 10;
+        total += 1;
+        lits = total % 10;
+        residue = 10 - lits;
+
+      } else if (small == 'b') {
+        // b = 11;
+        total += 10;
+        lits = total % 10;
+        residue = 10 - lits;
+
+      } else if (small == 'c') {
+        // c = 12;
+        total += 19;
+        lits = total % 10;
+        residue = 10 - lits;
+
+      } else if (small == 'd') {
+        // d = 13;
+        total += 28;
+        lits = total % 10;
+        residue = 10 - lits;
+
+      } else if (small == 'e') {
+        // e = 14;
+        total += 37;
+        lits = total % 10;
+        residue = 10 - lits;
+      } else if (small == 'f') {
+        // f = 15;
+        total += 46;
+        residue = 10 - lits;
+
+      } else if (small == 'g') {
+        // g = 16;
+        total += 55;
+        lits = total % 10;
+        residue = 10 - lits;
+      } else if (small == 'h') {
+        // h = 17;
+        total += 64;
+        lits = total % 10;
+        residue = 10 - lits;
+
+      } else if (small == 'j') {
+        // j = 18;
+        total += 73;
+        lits = total % 10;
+        residue = 10 - lits;
+
+      } else if (small == 'k') {
+        // k = 19;
+        total += 82;
+        lits = total % 10;
+        residue = 10 - lits;
+
+      } else if (small == 'l') {
+        // l = 20;
+        total += 2;
+        lits = total % 10;
+        residue = 10 - lits;
+
+      } else if (small == 'm') {
+        // m = 21;
+        total += 11;
+        lits = total % 10;
+        residue = 10 - lits;
+
+      } else if (small == 'n') {
+        // n = 22;
+        total += 20;
+        lits = total % 10;
+        residue = 10 - lits;
+
+      } else if (small == 'p') {
+        // p = 23;
+        total += 29;
+        lits = total % 10;
+        residue = 10 - lits;
+        console.log(residue);
+      } else if (small == 'q') {
+        // q = 24;
+        total += 38;
+        lits = total % 10;
+        residue = 10 - lits;
+
+      } else if (small == 'r') {
+        // r = 25;
+        total += 47;
+        lits = total % 10;
+        residue = 10 - lits;
+
+      } else if (small == 's') {
+        // s = 26;
+        total += 56;
+        lits = total % 10;
+        residue = 10 - lits;
+
+      } else if (small == 't') {
+        // t = 27;
+        total += 65;
+        lits = total % 10;
+        residue = 10 - lits;
+        console.log(residue);
+      } else if (small == 'u') {
+        // u = 28;
+        total += 74;
+        lits = total % 10;
+        residue = 10 - lits;
+
+      } else if (small == 'v') {
+        // v = 29;
+        total += 83;
+        lits = total % 10;
+        residue = 10 - lits;
+
+      } else if (small == 'x') {
+        // x = 30;
+        total += 3;
+        lits = total % 10;
+        residue = 10 - lits;
+
+      } else if (small == 'y') {
+        // y = 31;
+        total += 12;
+        lits = total % 10;
+        residue = 10 - lits;
+
+      } else if (small == 'z') {
+        // z = 33;
+        total += 30;
+        lits = total % 10;
+        residue = 10 - lits;
+
+      } else if (small == 'i') {
+        // i = 34;
+        total += 39;
+        lits = total % 10;
+        residue = 10 - lits;
+
+      } else if (small == 'o') {
+        // o = 35;
+        total += 48;
+        lits = total % 10;
+        residue = 10 - lits;
+
+      }
+
+      if (numeric9 == residue) {
+        console.log("correct!");
+        return true
+      } else {
+        console.log("wrong!")
+        return false
+      }
+    }
+
+  $(document).on("click", '[data-toggle="lightbox"]', function (event) {
+    event.preventDefault();
+    $(this).ekkoLightbox();
+  });
+
+
+
+
+
+
+</script>

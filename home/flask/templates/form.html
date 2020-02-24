@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Flasky{% endblock %}
+
+{% block page_content %}
+   
+    <form name="form1" method="POST"> 
+        <input type='text' name='username' autofocus/>
+        <input type="submit" value="submit">   
+    </form>
+    <div id="info">
+
+    </div>
+    <script>
+    function checkForm() {
+        if (!form1.username.value.length) {
+            console.log('nothing to submit')
+            return false;
+        }
+        /*$.post('/form', $(form1).serialize(), function (data) {
+            
+	    
+            console.log('hahaha');
+
+            //outCome1 = $('<div class="alert alert-secondary" role="alert" style="width:200px">匿名: ' + data.username + '</div>');
+
+            //$('#info').append(outCome1);
+            
+        });*/
+	$.post( "/form", { name: "John", time: "2pm" } );
+
+	console.log('misssingggg')
+        return false;
+    }
+    </script>
+{% endblock %}

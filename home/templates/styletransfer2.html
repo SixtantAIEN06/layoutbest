@@ -1,0 +1,114 @@
+{%extends 'base.html' %}
+{% load static %}
+{%  block title %} STYLE SELECT {% endblock %}
+{% block cardtitle%} CHOOSE THE STYLE YOU LIKE ! {% endblock%}
+
+{%block content%}
+<form method="POST" id="idForm" enctype="multipart/form-data">
+  {% csrf_token %}
+  {% if photopath != None %}
+<div class="container">
+ 
+  <div class="row">
+    <div class="mt-3" style="margin:0 auto">
+      <img id="radius" src="{% static './temp/before.jpg' %}" style="max-height: 250px; margin:0 auto">
+      <img id="radius" class="notradius" src="{% static './temp/arrow.png' %}" style="max-height: 250px; margin-left: 50px;">
+      <img id="radius" src="{% static './temp/split.jpg' %}" style="max-height: 250px; margin-left: 50px;">
+    </div>
+  </div>
+
+  {% endif %}
+
+  <!-- </div>
+    </div> -->
+  <div class="row">
+    <div class="mt-3" style="margin:0 auto">
+      
+      <div>
+
+        <label for=style1>
+          <figure><div><img id="style-1" src="{% static './makeupstyle/1.jpg' %}" height="120"></div><figcaption>風格1</figcaption></figure>
+        </label>
+        <input type="radio" name="style" id="style1" value="style1">
+
+        <label for=style2>
+          <figure><div><img id="style-2" src="{% static './makeupstyle/2.jpg' %}" height="120"></div><figcaption>風格2</figcaption></figure>
+        </label>
+        <input type="radio" name="style" id="style2" value="style2">
+
+        <label for=style3>
+          <figure><div><img id="style-3" src="{% static './makeupstyle/3.jpg' %}" height="120"></div><figcaption>風格3</figcaption></figure>
+        </label>
+        <input type="radio" name="style" id="style3" value="style3">
+
+        <label for=style4>
+          <figure><div><img id="style-4" src="{% static './makeupstyle/4.jpg' %}" height="120"></div><figcaption>風格4</figcaption></figure>
+        </label>
+        <input type="radio" name="style" id="style4" value="style4">
+
+
+        <label for=style5>
+          <figure><div><img id="style-5" src="{% static './makeupstyle/5.jpg' %}" height="120"></div><figcaption>風格5</figcaption></figure>
+        </label>
+
+        <input type="radio" name="style" id="style5" value="style5">
+
+
+        <label for=style6>
+          <figure><div><img id="style-6" src="{% static './makeupstyle/6.jpg' %}" height="120"></div><figcaption>風格6</figcaption></figure>
+        </label>
+        <input type="radio" name="style" id="style6" value="style6">
+
+
+        <label for=style7>
+          <figure><div><img id="style-7" src="{% static './makeupstyle/7.jpg' %}" height="120"></div><figcaption>風格7</figcaption></figure>
+        </label>
+        <input type="radio" name="style" id="style7" value="style7">
+
+        <label for=style8>
+          <figure><div><img id="style-8" src="{% static './makeupstyle/8.jpg' %}" height="120"></div><figcaption>風格8</figcaption></figure>
+        </label>
+        <input type="radio" name="style" id="style8" value="style8">
+
+      </div>
+    </div>
+
+  
+  <div class="container">
+    <div class="row">
+      <div class="mt-3">
+
+        <div><button type="submit" class="btn btn-primary" id="submitclick" style="display: none;">Create</button></div>
+      </div>
+
+    </div>
+
+
+
+  </div>
+
+</div>
+</div>
+</form>
+<!-- <script>
+  // function submitXML() {
+  //   var chooseid = $('#photoupload').get(0).files[0];
+  //   console.info(chooseid);
+  //   if (fileInput) {
+  //     $("#photouploadButton")[0].style.display = 'none';
+  //     $("#photouploadButton").submit();
+
+  //   } else {
+  //     $("#warnforpic").text("請選擇上傳檔案！");
+  //     return false;
+  //   }
+  // }
+  $( "#other" ).click(function() {
+  $( "#target" ).submit();
+});
+</script> -->
+<script>
+
+</script>
+
+{% endblock %}

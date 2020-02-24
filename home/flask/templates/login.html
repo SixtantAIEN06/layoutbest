@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Flasky{% endblock %}
+
+{% block page_content %}
+ <!-- <% if(locals.flashMsg){ %> -->
+        
+    <div class="alert alert-primary text-center" style="width:200px; margin: auto;" role="alert">
+        帳號或密碼錯誤
+    </div>
+    
+
+ <!--    <% }%> -->
+    <br>
+    <div class="text-center" style="margin: auto; width:250px; background-color: white; border: 2px solid white; border-radius: 12px;">
+        <form method="post">
+            <div class="form-group">
+                <label style="width:200px;" for="exampleInputEmail1">User</label>
+                <input style="width:200px; margin:auto" type="text" class="form-control" id="exampleInputEmail1"
+                    aria-describedby="emailHelp" name="user">
+            </div>
+            <div class="form-group">
+                <label style="width:200px;" for="exampleInputPassword1">Password</label>
+                <input style="width:200px; margin:auto" type="password" class="form-control" id="exampleInputPassword1"
+                    name="password">
+            </div>
+            <button style="width:200px; text-align:center; margin: 5px" type="submit" class="btn btn-primary">Login</button>
+        </form>
+    </div>
+
+
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{%extends 'base.html' %}
+{% load static %}
+{%  block title %} {{ title }}  {% endblock %}
+{% block cardtitle %} {{ title }} {% endblock %}
+
+{% block content %}
+
+<div class="contain animated bounce">
+  <form id="form1" runat="server" method="POST" enctype="multipart/form-data" onsubmit="return submitXML()">
+    {% csrf_token %}
+    <!-- <div class="alert"></div> -->
+    
+    {% if photopath != None %}
+    <div class="mb-3 mt-3"><img style="width: 640px;" src="{% static photopath %}"></div>
+    {% endif %}
+    {% if photopath == None %}
+    <div class="mb-3 mt-3"><img id="blah" style="width: 640px;" src="{% static 'images/baby.jpg' %}" alt="your image"
+        title='' /></div>
+    {% endif %}
+    <div class="input-group">
+      <div class="custom-file">
+        <input type="file" name='photoupload' id="inputGroupFile01" class="imgInp custom-file-input"
+          aria-describedby="inputGroupFileAddon01">
+        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+      </div>
+    </div>
+
+    {% if photopath == None %}
+    <div class="mb-3 mt-3">
+      <button type="submit" id="photouploadButton" class="btn btn-primary">Submit</button><span class="ml-3" id="warnforpic"></span>
+      <sapn class="ml-3" id="warnforpic"></sapn>
+    </div>
+    {% endif %}
+    {% if photopath != None %}
+    <button type="button" id="photodownload" class="btn btn-primary">Download</button>
+    <div><button type="button" class="btn btn-primary" id="json">json</button></div>
+    {% endif %}
+  </form>
+</div>
+{% endblock %}

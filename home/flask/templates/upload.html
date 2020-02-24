@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Flasky{% endblock %}
+
+{% block page_content %}
+
+  <h1>檔案上傳示例</h1>
+  <form action="" enctype='multipart/form-data' method='POST' id="target">
+    <input type="file" id='sub' name="file">
+    <input id="upload" type="submit"  value="上傳">
+    
+  </form>
+
+  {% endblock %}

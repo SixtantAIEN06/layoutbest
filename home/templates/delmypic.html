@@ -1,0 +1,10 @@
+{%extends 'base.html' %}
+{%  block title %} DELETE YOUR PHOTO {% endblock %}
+        <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+            <div class="form-group">
+              <label for="photoupload">Example file input</label>
+              <input type="file" name='photoupload' class="form-control-file" id="photoupload">
+              <input type="submit" id="photoupload" value="sumit"class="btn btn-primary">Submit Delete</button>
+            </div>
+        </form>

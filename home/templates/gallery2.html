@@ -1,0 +1,44 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block title %}AIEN06-TEAM 4{% endblock %}
+
+{% block content %}
+
+<form action="/selected/" method="get">
+
+    <div class="form-group">
+        <!-- <label for="typename">Class name</label>
+                <input type="text" name="searchname" class="form-control" id="typename">
+        </div> -->
+        <!-- <div class="form-group">
+                <label for="numbersinput">Numbers</label>
+                <input type="text" name="nums" class="form-control" id="numbersinput"> -->
+        <label for="typename">語意分析用</label>
+        <input type="text" name="luis" class="form-control" id="luis">
+    </div>
+    <button type="submit" class="btn btn-primary nt-3">Submit</button>
+
+
+</form>
+
+{% for data in datas%}
+
+<!-- <div class="ml-3" style="float: left; z-index: auto;">
+    <a href="{% static data.image_path %}" data-toggle="lightbox" data-gallery="gallery" class="col-md-4">
+        <img id="gla" src="{% static data.image_path %}" style="max-width: 200px" alt="">
+    </a>
+</div> -->
+
+<div class="card rounded mx-auto d-block" style="width: 360px; height: 270px;float: left; z-index: auto;">
+    <img id="gla" src="{% static data.image_path %}" style="max-height:100%;max-width:100%;position: relative;" class="card-img-top mx-auto d-block" alt="">
+*9+-
+    <!-- <div class="card-body">
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    </div> -->
+  </div>
+
+{% endfor %}
+
+
+
+{% endblock%}

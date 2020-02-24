@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+{% load static %}
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{% endblock%}</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+    <style>
+     
+     img:not([class]){
+      filter: drop-shadow(12px 12px 7px rgba(0, 0, 0, 0.5));
+      margin:30px;
+      border-radius: 9px;
+  
+      }
+
+      img:hover:not(#radius):not(#blah):not(#gla){
+        width: 140px;
+        height: 140px;
+      }
+
+
+      input{
+        display: none;
+      }
+
+      figcaption{
+        text-align: center;
+      }
+      </style>
+</head>
+
+<body>
+<div class="container marginkeep">
+    <div class="row justify-content-center">
+        <div class="col-lg-4" style="margin-top: 200px;">
+
+<img src="" alt="">
+
+<form method="post" action="/" >
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="user_id">USER ID</label>
+        <input type="text" class="form-control" name="user_id" id="user_id">
+
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" name="password" id="password">
+    </div>
+    <button type="submit" class="btn btn-primary">LOG IN</button>
+    <a type="button" class="btn btn-primary" href="/signup">SIGN UP</a>
+
+</form>
+
+        </div>
+    </div>
+</div>
+
+   
+</body>
+</html>

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Flasky{% endblock %}
+
+{% block page_content %}
+<img src="/static/uploads/star1.jpg" alt="Smiley face" height="200" width="200">
+<div class="page-header">
+     {{ first }} 
+    <h1>Hello, {{ name }}!</h1>
+    {% if test is defined %}
+	{{test}}   
+    {% endif %}
+    {% for user in fortest %}
+           {% if loop.last %}
+                <h1>lastttttttttttttttttttttt</h1>
+           {% endif %}
+           <h1>{{ user}} </h1>
+    {% endfor %}
+
+    
+</div>
+
+
+
+{% endblock %}

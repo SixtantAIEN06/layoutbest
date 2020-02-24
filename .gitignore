@@ -1,0 +1,26 @@
+# Build and Release Folders
+bin-debug/
+bin-release/
+[Oo]bj/
+[Bb]in/
+
+# Other files and folders
+.settings/
+.migrations/
+# Executables
+*.swf
+*.air
+*.ipa
+*.apk
+*.pyc
+*.meta
+yolov3_test_loss=30.0225.ckpt-15.data-00000-of-00001
+yolov3_test_loss=30.0225.ckpt-15.index
+yolov3_test_loss=30.0225.ckpt-15.meta
+yolov3_coco_demo.ckpt.data-00000-of-00001
+yolov3_coco_demo.ckpt.index
+settings.py
+
+# Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
+# should NOT be excluded as they contain compiler settings and other important
+# information for Eclipse / Flash Builder.

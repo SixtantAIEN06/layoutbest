@@ -1,0 +1,41 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block title %}AIEN06-TEAM 4{% endblock %}
+
+{% block content %}
+
+<form action="/selected/" method="get">
+
+    <div class="form-group">
+            <!-- <label for="typename">Class name</label>
+            <input type="text" name="searchname" class="form-control" id="typename">
+    </div> -->
+    <!-- <div class="form-group">
+            <label for="numbersinput">Numbers</label>
+            <input type="text" name="nums" class="form-control" id="numbersinput"> -->
+            {% if errormassage != None %}
+            <div class="alert alert-info" role="alert">
+                {{ errormassage }}
+              </div>
+            {% endif %}
+
+        <label for="typename">語意分析用</label>
+        <input type="text" name="luis" class="form-control" id="luis">
+    </div>
+    <button type="submit" class="btn btn-primary nt-3">Submit</button>
+    <a class="btn btn-primary nt-3" href="/gallery">Clean</a>
+
+</form>
+{% for data in output_imagepath %}
+
+<!-- <div class="ml-3 mb-5" style="float: left;"><img id="gla" style="max-width: 200px;" src="{% static data.image_path %}" alt=""></div> -->
+<div class="ml-3 mb-5" style="float: left;"><img id="gla" style="max-width: 200px;" src="{% static data %}" alt=""></div>
+{% endfor %}
+
+
+
+{% endblock%}
+
+
+
+

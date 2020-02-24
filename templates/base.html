@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+  {% load static %}
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{% endblock%}</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+    <style>
+     
+     img:not([class]){
+      filter: drop-shadow(12px 12px 7px rgba(0, 0, 0, 0.5));
+      margin:30px;
+      border-radius: 9px;
+      
+  
+      }
+
+      img[id*="style"]{
+        opacity: 0.7;
+      }
+
+      img:hover:not(#radius):not(#blah):not(#gla){
+        opacity: 1;
+        box-shadow: 0 0 5px 3px rgba(0, 140, 186, 0.5);
+        
+      }
+
+
+      input{
+        display: none;
+      }
+
+      figcaption{
+        text-align: center;
+      }
+    .earth {
+        transform: rotate(60deg);
+        width: 50px;
+        height: 50px;
+        overflow: hidden;
+        
+        /*margin-left: auto;
+        margin-right: auto;
+         opacity: 0.4; */
+        pointer-events: none;
+        transition-duration: 0.4s;
+    }
+      </style>
+</head>
+
+<body>
+  
+  {% include 'header.html' %}
+  <div class='container-fluid'>
+    <div class="row">
+
+      <div class="col-2">
+        <div class="card mr-2 ml-2">
+          <div class="card-header">
+            Featured
+          </div>
+          <div class="card-body">
+            <img class="earth" src="{% static 'images/earth.png' %}" style="box-shadow: none;" />
+            {{now}}
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col-10">
+        <!-- <div class="card mr-5"> -->
+          <!-- <div class="card-header"> -->
+            {% block cardtitle%} {% endblock%}
+          <!-- </div> -->
+          <!-- <div class="card-body"> -->
+
+            {% block content %} {% endblock %}
+          <!-- </div> -->
+        <!-- </div> -->
+      </div>
+
+    </div>
+
+  </div>
+
+  </div>
+
+{% include 'scripts.html' %}
+{% include 'footer.html' %}
+</body>
+</html>

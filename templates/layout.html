@@ -1,0 +1,68 @@
+{%extends 'base.html' %}
+{% load static %}
+{%  block title %} {{ title }} {% endblock %}
+{% block cardtitle %} {{ title }} {% endblock %}
+
+{% block content %}
+
+<div class="contain animated bounce">
+  <form id="form1" runat="server" method="POST" enctype="multipart/form-data" onsubmit="return submitXML()">
+    {% csrf_token %}
+    <!-- <div class="alert"></div> -->
+    <div>{{ message }}</div>
+    {% if photopath != None %}
+    <div style="margin:0 auto"><img id="blah" style=" max-height: 600px;  margin:0 auto" src="{% static photopath %}">
+    </div>
+    {% endif %}
+    {% if photopath == None %}
+    <div><img id="blah" style=" max-height: 600px; max-width:500px; margin:0 auto" src="{% static 'images/star.jpg' %}"
+        alt="your image" title='' /></div>
+    {% endif %}
+    <div class="input-group">
+      <div class="custom-file">
+        <input type="file" name='photoupload' id="inputGroupFile01" class="imgInp custom-file-input"
+          aria-describedby="inputGroupFileAddon01">
+        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+      </div>
+    </div>
+
+
+    <div class="mb-3 mt-3">
+      <button type="submit" onclick="submitjs()" id="photouploadButton" class="btn btn-primary">Submit</button>
+     
+      <span class="ml-3" id="warnforpic"></span>
+      <sapn class="ml-3" id="warnforpic"></sapn>
+    </div>
+
+    {% if photopath != None %}
+    <button type="button" id="photodownload" class="btn btn-primary">Download</button>
+    {% endif %}
+    <div id="show"></div>
+    <div><button type="button" class="btn btn-primary" id="json">json</button></div>
+    <div><button type="button" class="btn btn-primary" id="httpget">httpget</button></div> 
+  
+  </form>
+</div>
+
+<script>
+
+
+
+
+//b = $('<iframe src="{% static 'forjs/wait.html' %}" style="position:fixed; top:0; left:0; bottom:0; right:0; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:999999; position:absolute; opacity:0.8; display:none;" frameborder="0" scrolling="no"></iframe>');
+b=$('<img src="{% static 'images/loading.gif' %}" alt="" style="box-shadow: none; position: absolute;  left:40%; top: 40%; width:300px; height:300px;   z-index:999999; opacity:0.3; border-radius: 40px;">')
+  function submitjs() {
+    if ($('#blah').attr("src") != "/static/images/star.jpg") {
+      //console.log($('#blah').attr("src"))
+      
+      $('body').append(b);
+      
+
+
+    }
+  }
+
+
+
+</script>
+{% endblock %}
