@@ -126,27 +126,27 @@ class YoloTest(object):
                 image = utils.draw_bbox(image, bboxes_pr, show_label=self.show_label)
                 cv2.imwrite(self.write_image_path+image_path, image)
             self.dlist = []    
-            with open("home/object_detection/mAP/predicted/123.txt", 'a') as f:
-                class_names = []
-                for bbox in bboxes_pr: 
-                    coor = np.array(bbox[:4], dtype=np.int32)
-                    score = bbox[4]
-                    class_ind = int(bbox[5])               
-                    class_name = self.classes[class_ind]
-                    score = '%.4f' % score
-                    xmin, ymin, xmax, ymax = list(map(str, coor))
-                    class_names.append(class_name)
-                    bbox_mess = ' '.join
-                    print('\t' + str(bbox_mess).strip())
-                
-                d = dict(Counter(class_names))
-                d['image_path']="./"+img_
-                self.dlist.append(d)
-                im = image_path
-                id_name = f'{dict(Counter(class_names))}@{im}\n' 
-                f.write(id_name)
-                if num == 9:
-                    break
+            # with open("home/object_detection/mAP/predicted/123.txt", 'a') as f:
+            class_names = []
+            for bbox in bboxes_pr: 
+                coor = np.array(bbox[:4], dtype=np.int32)
+                score = bbox[4]
+                class_ind = int(bbox[5])               
+                class_name = self.classes[class_ind]
+                score = '%.4f' % score
+                xmin, ymin, xmax, ymax = list(map(str, coor))
+                class_names.append(class_name)
+                bbox_mess = ' '.join
+                print('\t' + str(bbox_mess).strip())
+            
+            d = dict(Counter(class_names))
+            d['image_path']="./"+img_
+            self.dlist.append(d)
+            im = image_path
+                # id_name = f'{dict(Counter(class_names))}@{im}\n' 
+                # f.write(id_name)
+                # if num == 9:
+                #     break
     def voc_2012_test(self, voc2012_test_path):
 
         img_inds_file = os.path.join(voc2012_test_path, 'ImageSets', 'Main', 'test.txt')
