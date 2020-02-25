@@ -132,37 +132,7 @@
     });
 
   });
-  var submitfunction = function () {
-    var Memberslist={{Memberslist|safe}};
-
-    if ( Memberslist.indexOf($("#user_id").val()) >=0) {
-      alert("帳號已被使用");
-      eval("document.form1['user_id'].focus()");
-    } else if ($("#user_id").val() == "") {
-      alert("你尚未填寫姓名");
-      eval("document.form1['user_id'].focus()");
-    }else if ($("#username").val() == "") {
-      alert("你尚未填寫姓名");
-      eval("document.form1['username'].focus()");
-    } else if ($("#password").val() == "") {
-      alert("你尚未填寫pwd");
-      eval("document.form1['password'].focus()");
-    } else if ($("#password").val() != $('#password2').val()) {
-      alert('密碼不一致！')
-      eval("document.form1['password'].focus()")
-    } else if ($("#email").val() == "") {
-      alert("你尚未填寫電子郵件地址");
-      eval("document.form1['email'].focus()");
-    } else {
-      if (identget() == true) {
-        document.form1.submit();
-      } else {
-        alert("請確認身分證!");
-      }
-
-    }
-    return false
-  };
+  
 
   var listener = function () {
     var cities = ['基隆市', '台北市', '新北市', '桃園市', '新竹市', '新竹縣', '苗栗縣', '台中市', '彰化縣', '南投縣', '雲林縣', '嘉義市', '嘉義縣', '台南市', '高雄市', '屏東縣', '台東縣', '花蓮縣', '宜蘭縣', '澎湖縣', '連江縣', '金門縣'],
