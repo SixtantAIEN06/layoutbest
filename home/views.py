@@ -414,6 +414,14 @@ def httpget(request):
     return HttpResponse(f"HELLO {name},{age}")
 
 def signup(request):
+    Memberslist_=Members.objects.all()
+    
+
+    Memberslist=[]
+    for i in range(len(Memberslist_)):
+        Memberslist.append(Memberslist_[i].user_id)
+    Memberslist=jjj.dumps(Memberslist)
+    print(Memberslist)
     if request.method == 'POST':
         username=request.POST['username']
         user_id=request.POST['user_id']
@@ -440,7 +448,7 @@ def signup(request):
     now=datetime.datetime.now()
     if "user_id" in request.session:
         del request.session["use_id"]
-    return render(request,'signup.html')
+    return render(request,'signup.html',locals())
 
 
 def login(request):
