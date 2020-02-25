@@ -10,7 +10,7 @@ import logging
 import time
 from collections import Counter
 
-logging.basicConfig(level=logging.INFO,format='%(asctime)s--%(module)s--%(levelname)s\n%(message)s')
+# logging.basicConfig(level=logging.INFO,format='%(asctime)s--%(module)s--%(levelname)s\n%(message)s')
 args={}
 def readPara(encodings,image,detection_method,tolerance):
     args["encodings"]=encodings

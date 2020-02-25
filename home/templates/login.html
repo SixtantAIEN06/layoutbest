@@ -39,19 +39,32 @@
       figcaption{
         text-align: center;
       }
+
+      .center{
+
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+        margin-bottom: 20px;
+      }
       </style>
 </head>
 
 <body>
-<div class="container marginkeep">
+<div class="container">
     <div class="row justify-content-center">
-        <div class="col-lg-4" style="margin-top: 200px;">
+        <div class="col-lg-4" style="margin-top:100px;">
 
 <img src="" alt="">
 
 <form method="post" action="/login/" >
-    {% csrf_token %}
-    <div>{{ message }}</div>
+  {% csrf_token %}
+    <div><img class="center" id="radius" src="{% static 'website_picture/photohub.png'%}"></div>
+    <div style="margin-bottom:50px;"><h1 class="mb-6" style="text-align: center;">{{ message }}</h1></div>
+    {% if request.session.message %}
+    <div style="margin-bottom:50px;"><h3 class="mb-6" style="text-align: center;">{{ request.session.message }}</h3></div>
+    {% endif %}
     <div class="form-group">
         <label for="user_id">USER ID</label>
         <input type="text" class="form-control" name="user_id" id="user_id">

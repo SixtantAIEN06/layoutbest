@@ -7,6 +7,7 @@ bin-release/
 # Other files and folders
 .settings/
 .migrations/
+migrations/
 # Executables
 *.swf
 *.air
@@ -19,7 +20,7 @@ yolov3_test_loss=30.0225.ckpt-15.index
 yolov3_test_loss=30.0225.ckpt-15.meta
 yolov3_coco_demo.ckpt.data-00000-of-00001
 yolov3_coco_demo.ckpt.index
-settings.py
+
 *.jpg
 *.png
 *.csv

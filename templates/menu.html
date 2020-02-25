@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100vw;
+            overflow: hidden;
+        }
+
+        body {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            background-image:  url("{% static 'website_picture/rain.jpg'%}") ; 
+            background-repeat: no-repeat;
+            background-position: center bottom;
+            background-size: cover;
+        }
+
+        .container {
+            margin: auto;
+            -webkit-perspective: 1000px;
+            perspective: 1000px;
+        }
+
+        .card {
+            height: 25vw;
+            width: 15vw;
+            border-radius: 10px;
+            overflow: hidden;
+            -webkit-transition: all .25s linear;
+            transition: all .25s linear;
+        }
+
+        .card img {
+            width: 100%;
+            height: 100%;
+            -o-object-fit: cover;
+            object-fit: cover;
+        }
+
+        .container:hover .card {
+            -webkit-box-shadow: 10px 30px 50px -6px black;
+            box-shadow: 10px 30px 50px -6px black;
+        }
+
+        /*# sourceMappingURL=card.css.map */
+    </style>
+</head>
+
+<body>
+    <!-- My answer for an SO question: https://stackoverflow.com/q/59871716/9060223 -->
+    
+
+
+       
+
+
+        <div class="container">
+            <div class="card" onclick="javascript:location.href='/gallery'">
+                <img src="{% static 'website_picture/gallery.png'%}" alt="Moonlight Cookie's Alluring Crescent Moon Costume">
+            </div>
+
+        </div>
+       
+
+        </div>
+        <div class="container">
+            <div class="card" onclick="javascript:location.href='/styletransfer'">
+                <img src="{% static 'website_picture/style_transfer.png'%}" alt="Moonlight Cookie's Alluring Crescent Moon Costume">
+            </div>
+
+        </div>
+    
+     <div class="container">
+            <div class="card" onclick="javascript:location.href='/facerecognition'">
+                <img src="{% static 'website_picture/face.png'%}" alt="Moonlight Cookie's Alluring Crescent Moon Costume">
+            </div>
+            
+   
+    <script>
+        let container = document.querySelectorAll('.container')
+        let card = document.querySelectorAll('.card')
+        //let container2 = document.querySelectorAll('.container')[1]
+        //let card2 = document.querySelectorAll('.card')[1]
+
+
+
+
+
+        //let i=1;
+        for (let i = 0; i < container.length; i++) {
+
+            container[i].addEventListener('mousemove', (e) => {
+                let xOffset = e.offsetX
+                let yOffset = e.offsetY
+                let cardHeight = card[i].clientHeight
+                let cardWidth = card[i].clientWidth
+                let heightCenter = Math.round(cardHeight / 2)
+                let widthCenter = Math.round(cardWidth / 2)
+                let rotateBaseValue = 20
+                let rotateXValue = (yOffset - heightCenter) / heightCenter * rotateBaseValue
+                let rotateYValue = (widthCenter - xOffset) / widthCenter * rotateBaseValue
+
+                card[i].style.transform = `scale(1.1) rotateX(${rotateXValue}deg) rotateY(${rotateYValue}deg)`
+            })
+
+            container[i].addEventListener('mouseout', (e) => {
+                card[i].style.transform = ''
+            })
+        }
+
+        /*container2.addEventListener('mousemove', (e) => {
+            let xOffset = e.offsetX
+            let yOffset = e.offsetY
+            let cardHeight = card2.clientHeight
+            let cardWidth = card2.clientWidth
+            let heightCenter = Math.round(cardHeight / 2)
+            let widthCenter = Math.round(cardWidth / 2)
+            let rotateBaseValue = 20
+            let rotateXValue = (yOffset - heightCenter) / heightCenter * rotateBaseValue
+            let rotateYValue = (widthCenter - xOffset) / widthCenter * rotateBaseValue
+
+            card2.style.transform = `scale(1.1) rotateX(${rotateXValue}deg) rotateY(${rotateYValue}deg)`
+        })
+
+        container2.addEventListener('mouseout', (e) => {
+            card2.style.transform = ''
+        })*/
+//         $('.card').click(function() {
+//   alert( "Handler for .click() called." );
+// });
+    </script>
+</body>
+
+</html>
