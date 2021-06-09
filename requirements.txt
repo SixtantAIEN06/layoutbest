@@ -5,7 +5,7 @@ cffi==1.14.0
 Click==7.0
 constantly==15.1.0
 cryptography==2.8
-Django==2.2.10
+Django==2.2.22
 dlib==19.19.0
 face-recognition==1.2.3
 face-recognition-models==0.3.0
